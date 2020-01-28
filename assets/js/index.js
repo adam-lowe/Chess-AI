@@ -1,1 +1,1 @@
-var board = Chessboard('myBoard')
+var board = Chessboard('myBoard', 'start')
