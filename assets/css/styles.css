@@ -4,3 +4,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.credit {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
