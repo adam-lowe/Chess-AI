@@ -18,20 +18,29 @@ function greySquare (square) {
   $square.css('background', background)
 }
 
-function onDragStart (source, piece) {
+function onDragStart (source, piece, position, orientation) {
   // do not pick up pieces if the game is over
-  if (game.game_over()) return false
+  if (game.game_over()) {return false}
 
-  // or if it's not that side's turn
-  if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-      (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
-    return false
+  // only pick up pieces for White
+  if (piece.search(/^b/) !== -1) return false
+}
+
+function makeRandomMove () {
+  var possibleMoves = game.moves()
+
+  // game over
+  if (possibleMoves.length === 0) {
+    alert('The game is over, You won!')
+    return
   }
+
+  var randomIdx = Math.floor(Math.random() * possibleMoves.length)
+  game.move(possibleMoves[randomIdx])
+  board.position(game.fen())
 }
 
 function onDrop (source, target) {
-  removeGreySquares()
-
   // see if the move is legal
   var move = game.move({
     from: source,
@@ -41,6 +50,9 @@ function onDrop (source, target) {
 
   // illegal move
   if (move === null) return 'snapback'
+
+  // make random legal move for black
+  window.setTimeout(makeRandomMove, 250)
 }
 
 function onMouseoverSquare (square, piece) {
