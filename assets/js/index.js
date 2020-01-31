@@ -31,7 +31,7 @@ function makeRandomMove () {
 
   // game over
   if (possibleMoves.length === 0) {
-    alert('The game is over, You won!')
+    alert('Game Over')
     return
   }
 
